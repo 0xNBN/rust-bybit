@@ -29,8 +29,8 @@ pub struct WebSocketApiClient;
 
 impl WebSocketApiClient {
     /// Get a builder for building spot websocket api client.
-    pub fn spot() -> SpotWebSocketApiClientBuilder {
-        SpotWebSocketApiClientBuilder::new()
+    pub fn spot(starting_endpoint: String) -> SpotWebSocketApiClientBuilder {
+        SpotWebSocketApiClientBuilder::new(starting_endpoint)
     }
 
     /// Get a builder for building inverse future websocket api client.
@@ -49,8 +49,8 @@ impl WebSocketApiClient {
     }
 
     /// Get a builder for building private websocket api client.
-    pub fn private() -> PrivateWebSocketApiClientBuilder {
-        PrivateWebSocketApiClientBuilder::new()
+    pub fn private(starting_endpoint :String) -> PrivateWebSocketApiClientBuilder {
+        PrivateWebSocketApiClientBuilder::new(starting_endpoint)
     }
 }
 

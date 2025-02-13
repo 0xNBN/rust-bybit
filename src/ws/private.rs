@@ -50,7 +50,7 @@ pub struct PrivateWebSocketApiClientBuilder {
 
 impl PrivateWebSocketApiClientBuilder {
     /// Create a new `PrivateWebSocketApiClientBuilder`. Channel URI is set to the mainnet.
-    pub fn new() -> Self {
+    pub fn new(starting_endpoint : String) -> Self {
         Self {
             uri: MAINNET_PRIVATE.to_string(),
         }

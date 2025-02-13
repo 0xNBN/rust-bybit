@@ -69,7 +69,7 @@ pub struct SpotWebSocketApiClientBuilder {
 
 impl SpotWebSocketApiClientBuilder {
     /// Create a new `SpotWebSocketApiClientBuilder`. Channel URI is set to the mainnet.
-    pub fn new() -> Self {
+    pub fn new(starting_endpoint : String) -> Self {
         Self {
             uri: MAINNET_SPOT.to_string(),
         }
