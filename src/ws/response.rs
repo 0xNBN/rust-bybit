@@ -1,5 +1,6 @@
 use super::callback::Arg;
 use serde::Deserialize;
+use serde_json::Value;
 
 /// The pong/subscription response.
 #[derive(Deserialize, Debug)]
@@ -506,6 +507,34 @@ pub struct Execution<'a> {
     pub block_trade_id: &'a str,
 }
 
+
+/// The fast execution data.
+///
+/// You may have multiple executions for one order in a single message.
+#[derive(Deserialize, Debug)]
+#[serde(rename_all = "camelCase")]
+pub struct FastExecution<'a> {
+    pub category: &'a str,
+    pub symbol: &'a str,
+    #[serde(rename = "execId")]
+    pub exec_id: &'a str,
+    #[serde(rename = "execPrice")]
+    pub exec_price: &'a str,
+    #[serde(rename = "execQty")]
+    pub exec_qty: &'a str,
+    #[serde(rename = "orderId")]
+    pub order_id: &'a str,
+    #[serde(rename = "isMaker")]
+    pub is_maker: bool,
+    #[serde(rename = "orderLinkId")]
+    pub order_link_id: &'a str,
+    pub side: &'a str,
+    #[serde(rename = "execTime")]
+    pub exec_time: &'a str,
+    pub seq: u64,
+}
+
+
 /// The order data.
 #[derive(Deserialize, Debug)]
 #[serde(rename_all = "camelCase")]
@@ -728,17 +757,20 @@ impl Arg for OptionPublicResponseArg {
     type ValueType<'a> = OptionPublicResponse<'a>;
 }
 
+
 #[derive(Deserialize, Debug)]
 #[serde(untagged)]
 pub enum PrivateResponse<'a> {
     #[serde(borrow)]
     Position(BasePrivateResponse<'a, Vec<Position<'a>>>),
     Execution(BasePrivateResponse<'a, Vec<Execution<'a>>>),
+    FastExecution(BasePrivateResponse<'a, Vec<FastExecution<'a>>>),
     Order(BasePrivateResponse<'a, Vec<Order<'a>>>),
     Wallet(BasePrivateResponse<'a, Vec<Wallet<'a>>>),
     Greek(BasePrivateResponse<'a, Vec<Greek<'a>>>),
     Pong(PrivatePongResponse<'a>),
     Op(OpResponse<'a>),
+    Unknown(Value), 
 }
 
 pub struct PrivateResponseArg;
