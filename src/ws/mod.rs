@@ -171,9 +171,12 @@ where
         }
 
         match ws.read_message() {
+             
             Ok(msg) => match msg {
                 Message::Text(content) => {
+                    println!("BYBIT ROOT WS READ MESSAGE {:?}", ws.read_message());
                     debug!("Received: {}", content);
+                    
                     match serde_json::from_str(&content) {
                         Ok(res) => callback(res),
                         Err(e) => error!("Error: {}", e),
