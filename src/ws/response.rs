@@ -106,6 +106,17 @@ pub struct BasePrivateResponse<'a, Data> {
     pub data: Data,
 }
 
+#[derive(Deserialize, Debug)]
+#[serde(rename_all = "camelCase")]
+pub struct BasePrivateFastResponse<'a, Data> {
+    /// Topic name.
+    pub topic: &'a str,
+    /// Data created timestamp (ms).
+    pub creation_time: u64,
+    /// The data vary on the topic.
+    pub data: Data,
+}
+
 /// The (price, size) pair of orderbook.
 #[derive(Deserialize, Debug)]
 pub struct OrderbookItem<'a>(pub &'a str, pub &'a str);
@@ -764,7 +775,7 @@ pub enum PrivateResponse<'a> {
     #[serde(borrow)]
     Position(BasePrivateResponse<'a, Vec<Position<'a>>>),
     Execution(BasePrivateResponse<'a, Vec<Execution<'a>>>),
-    FastExecution(BasePrivateResponse<'a, Vec<FastExecution<'a>>>),
+    FastExecution(BasePrivateFastResponse<'a, Vec<FastExecution<'a>>>),
     Order(BasePrivateResponse<'a, Vec<Order<'a>>>),
     Wallet(BasePrivateResponse<'a, Vec<Wallet<'a>>>),
     Greek(BasePrivateResponse<'a, Vec<Greek<'a>>>),
