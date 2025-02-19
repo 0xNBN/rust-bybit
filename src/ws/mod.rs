@@ -181,11 +181,11 @@ where
                         
                         Ok(res) => {
                             callback(res);
-                            println!("BYBIT ROOT2 WS READ MESSAGE {:?}", content);
+                         
                         },
                         Err(e) => {
                             error!("Error: {}", e);
-                            println!("BYBIT ROOT2 WS ERROR MESSAGE {:?}", e); 
+                           
                         
                         },
                     }
