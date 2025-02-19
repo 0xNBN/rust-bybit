@@ -185,7 +185,7 @@ where
                         },
                         Err(e) => {
                             error!("Error: {}", e);
-                            println!("BYBIT ROOT2 WS ERROR MESSAGE {:?}", content); 
+                            println!("BYBIT ROOT2 WS ERROR MESSAGE {:?}", e); 
                         
                         },
                     }
