@@ -174,7 +174,7 @@ where
              
             Ok(msg) => match msg {
                 Message::Text(content) => {
-                    println!("BYBIT ROOT WS READ MESSAGE {:?}", content);
+                  
                     debug!("Received: {}", content);
                     
                     match serde_json::from_str(&content) {
