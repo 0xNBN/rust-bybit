@@ -34,6 +34,11 @@ impl PrivateWebsocketApiClient {
         self.subscriber.sub_greek();
     }
 
+    pub fn subscribe_topic(&mut self,topic: String) {
+        self.subscriber.sub(topic);
+        
+    }
+
     pub fn run<C: Callback<PrivateResponseArg>>(&self, callback: C) -> Result<()> {
         run(
             &self.uri,
